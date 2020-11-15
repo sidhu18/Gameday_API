@@ -6,6 +6,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended:true }));
 
+//Bring in the routes
+app.use("/user", require("./routes/userRoutes"));
+
 // Setup error handlers
 const errorHandelers = require('./handlers/errorHandlers');
 app.use(errorHandelers.notFound);
@@ -15,7 +18,6 @@ if(process.env.ENV == "DEVELOPMENT"){
 }else{
     app.use(errorHandelers.productionErrors);
 }
-
 
 
 module.exports = app;
